@@ -45,8 +45,9 @@ flowchart TD
   REACT -->|"API calls + JWT"| FASTAPI
   FASTAPI -->|"verify token"| FBAUTH
   FASTAPI -->|"read leaderboard"| REDIS
-  FASTAPI -->|"write votes / read data"| PG
+  PG --->|"populate cache"| REDIS
+  FASTAPI -->|"write votes"| PG
   FASTAPI -->|"register upload"| FILT
-  REDIS -->|"get leaderboard"| PG
+
 
 ```

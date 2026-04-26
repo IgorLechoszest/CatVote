@@ -8,7 +8,24 @@ Basic workflow:
 
 1. Authorize `gcloud` against this project
 
-2. Work with Terraform 
+2. Enable APIs in `gcloud`
+
+    ```sh
+    gcloud services enable servicenetworking.googleapis.com \
+                            vpcaccess.googleapis.com \
+                            redis.googleapis.com \
+      --project=PROJECT_ID
+    ```
+
+3. Create `terraform.tfvars`
+
+    Create a file named `terraform.tfvars` in the [infra folder](/infra/) of the project and define the required variables:
+    ```hcp
+    project_id   = "PROJECT_ID"
+    db_password  = "DB_PASSWORD" 
+    ```
+
+4. Work with Terraform 
 
     ```sh
     cd infra
@@ -28,15 +45,15 @@ Generic procedure below. For convenience use [setup-state.sh](./setup-state.sh)
 
 1. Create bucket
     ```shell
-    gcloud storage buckets create gs://YOUR_BUCKET_NAME \
-      --project=YOUR_PROJECT_ID \
-      --location=YOUR_REGION \
+    gcloud storage buckets create gs://BUCKET_NAME \
+      --project=PROJECT_ID \
+      --location=REGION \
       --uniform-bucket-level-access
     ```
 
 2. Enable versioning
     ```shell
-    gcloud storage buckets update gs://YOUR_BUCKET_NAME \
+    gcloud storage buckets update gs://BUCKET_NAME \
       --versioning
     ```
 
@@ -44,7 +61,7 @@ Generic procedure below. For convenience use [setup-state.sh](./setup-state.sh)
     ```hcl
     terraform {
       backend "gcs" {
-        bucket  = "YOUR_BUCKET_NAME"
+        bucket  = "BUCKET_NAME"
         prefix  = "terraform/state"   # path inside the bucket
       }
     }

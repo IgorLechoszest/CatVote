@@ -11,13 +11,3 @@ resource "google_storage_bucket" "filtered" {
   uniform_bucket_level_access = true
   force_destroy               = true
 }
-
-resource "google_pubsub_topic" "cat_urls" {
-  name = "cat-urls"
-}
-
-resource "google_pubsub_subscription" "validate" {
-  name                 = "validate-sub"
-  topic                = google_pubsub_topic.cat_urls.name
-  ack_deadline_seconds = 60
-}

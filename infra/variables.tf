@@ -7,3 +7,8 @@ variable "region" {
 variable "zone" {
   default = "europe-central2-c"
 }
+
+variable "db_password" {
+  type      = string
+  sensitive = true
+}

@@ -2,11 +2,11 @@ terraform {
   required_providers {
     google = {
       source  = "hashicorp/google"
-      version = "6.8.0"
+      version = "7.29.0"
     }
     google-beta = {
       source  = "hashicorp/google-beta"
-      version = "6.8.0"
+      version = "7.29.0"
     }
   }
   backend "gcs" {
@@ -16,10 +16,10 @@ terraform {
 }
 
 provider "google" {
-  project = var.project_id
-  region  = var.region
-  zone    = var.zone
-  billing_project = var.project_id
+  project               = var.project_id
+  region                = var.region
+  zone                  = var.zone
+  billing_project       = var.project_id
   user_project_override = true
 }
 

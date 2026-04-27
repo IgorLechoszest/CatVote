@@ -8,16 +8,7 @@ Basic workflow:
 
 1. Authorize `gcloud` against this project
 
-2. Enable APIs in `gcloud`
-
-    ```sh
-    gcloud services enable servicenetworking.googleapis.com \
-                            vpcaccess.googleapis.com \
-                            redis.googleapis.com \
-      --project=PROJECT_ID
-    ```
-
-3. Create `terraform.tfvars`
+2. Create `terraform.tfvars`
 
     Create a file named `terraform.tfvars` in the [infra folder](/infra/) of the project and define the required variables:
     ```hcp
@@ -25,7 +16,7 @@ Basic workflow:
     db_password  = "DB_PASSWORD" 
     ```
 
-4. Work with Terraform 
+3. Work with Terraform 
 
     ```sh
     cd infra

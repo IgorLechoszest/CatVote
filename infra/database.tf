@@ -23,7 +23,7 @@ resource "google_sql_database_instance" "postgres" {
     }
   }
 
-  deletion_protection = false  # easy terraform destroy later
+  deletion_protection = false # easy terraform destroy later
 }
 
 # A database inside the instance (instance = the server, database = the actual DB)

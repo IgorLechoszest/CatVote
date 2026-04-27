@@ -21,3 +21,22 @@ output "redis_port" {
 output "vpc_connector_id" {
   value = google_vpc_access_connector.connector.id
 }
+
+output "frontend_url" {
+  value = google_cloud_run_v2_service.frontend.uri
+}
+
+output "backend_url" {
+  value = google_cloud_run_v2_service.backend.uri
+}
+
+output "firebase_web_config" {
+  value = {
+    api_key             = data.google_firebase_web_app_config.frontend.api_key
+    auth_domain         = data.google_firebase_web_app_config.frontend.auth_domain
+    project_id          = var.project_id
+    storage_bucket      = data.google_firebase_web_app_config.frontend.storage_bucket
+    messaging_sender_id = data.google_firebase_web_app_config.frontend.messaging_sender_id
+    app_id              = google_firebase_web_app.frontend.app_id
+  }
+}

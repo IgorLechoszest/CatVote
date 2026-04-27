@@ -38,16 +38,19 @@ flowchart TD
   VALID -->|"store approved"| FILT
   VALID -->|"write metadata"| PG
   FILT --> REACT
+  VALID <--> |"asking/sending"|UNFILT
 
   USER -->|"loads app"| REACT
   USER -->|"sign in"| FBAUTH
   FBAUTH -->|"JWT token"| REACT
   REACT -->|"API calls + JWT"| FASTAPI
+  
   FASTAPI -->|"verify token"| FBAUTH
-  FASTAPI -->|"read leaderboard"| REDIS
-  PG --->|"populate cache"| REDIS
-  FASTAPI -->|"write votes"| PG
-  FASTAPI -->|"register upload"| FILT
+  FASTAPI <-->|"caching"| REDIS
+  FASTAPI <-->|"write votes / read data"| PG
+  
+  FASTAPI -->|"store raw user image"| UNFILT
+  FASTAPI -->|"publish user image URL"| PUBSUB
 
 
 ```
